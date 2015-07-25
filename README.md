@@ -53,13 +53,16 @@ The `test` argument can take any of [the following methods](https://github.com/m
 * `length(obj, expected_length, message)`
 
 
-#### Describe It API
+#### Describe/It API  
+
+``clinical:verification`` extends the default API with Describe/It syntax.
 
 * `describe(suiteName, function)`
 * `it(testName, function)`
 
-
 #### Nested Describes
+
+Describe() can arbitrarily nested; and it() supports Chai Expect syntax.
 
 ```javascript
 describe('top-level describe', function(){
@@ -77,7 +80,6 @@ describe('top-level describe', function(){
 #### Server & Client Only Tests
 
 ```javascript
-
 describe.client('client only test suite', function(){
   it('runs only in client', function(){
     expect(Meteor.isClient).to.be.true;
