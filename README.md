@@ -9,44 +9,32 @@ Simply install with the following command:
 
 ``meteor add clinical:verification``
 
-#### Behavior Driven Development API
+#### Running Tests  
 
-* `describe(suiteName, function)`
-* `it(testName, function)`
+There are two ways of running the verification tests:
 
+````sh
+# via the tinytest runner
+cd myapp
+meteor test-packages
 
-```js
+# via the nightwatch tinytest pickup
+starrynight run-tests --framework tinytest-ci
+````
 
-describe('suite1', function(){
-  before(function (test){
-    // Let's do 'cleanup' beforeEach too, in case another suite didn't clean up properly
-    watchers.restoreAll();
-    stubs.restoreAll();
-    console.log("I'm beforeAll");
-  });
-  beforeEach(function (test){
-    console.log("I'm beforeEach");
-    watchers.create('log', console, 'log');
-  });
-  afterEach(function (test){
-    watchers.restoreAll();
-    console.log("I'm afterEach");
-  });
-  after(function (test){
-    console.log("I'm afterAll");
-    watchers.restoreAll();
-    stubs.restoreAll();
-  });
-  it('test1', function(test){
-    console.log('Hello world');
-    expect(watchers.log).to.have.been.calledWith('Hello world');
-  })
-});
-```
+See the [StarryNight TinyTest Walkthrough](http://localhost:4000/examples/tinytests) for more information on how to use the ``--framework tinytest-ci`` functionality.
 
 #### TinyTest API
 
-The `test` argument is the same test object passed to a test function by `Tinytest.add`, and has the following methods:
+The default API for a package verification test, looks something like this.  
+
+````js
+Tinytest.add('example', function (test) {
+  test.equal(true, true);
+});
+````
+
+The `test` argument can take any of [the following methods](https://github.com/meteor/meteor/blob/devel/packages/tinytest/tinytest.js):
 
 * `equal(actual, expected, message)`
 * `notEqual(actual, expected, message)`
@@ -64,7 +52,62 @@ The `test` argument is the same test object passed to a test function by `Tinyte
 * `include(array, value)`
 * `length(obj, expected_length, message)`
 
-You can see the source code [here](https://github.com/meteor/meteor/blob/devel/packages/tinytest/tinytest.js).
+
+#### Describe It API
+
+* `describe(suiteName, function)`
+* `it(testName, function)`
+
+
+#### Nested Describes
+
+```javascript
+describe('top-level describe', function(){
+  describe('nested describe', function() {
+    describe('deep nested describe', function() {
+      it('a test', function () {
+        expect(true).to.be.true;
+      })
+    })
+  })
+});
+```
+
+
+#### Server & Client Only Tests
+
+```javascript
+
+describe.client('client only test suite', function(){
+  it('runs only in client', function(){
+    expect(Meteor.isClient).to.be.true;
+  });
+  it.server('overrides describe.client and runs only in server', function(){
+    expect(Meteor.isServer).to.be.true;
+  });
+});
+
+describe.server('server only test suite', function(){
+  it('runs only in server', function(){
+    expect(Meteor.isServer).to.be.true;
+  });
+  it.client('overrides describe.server and runs only in client', function(){
+    expect(Meteor.isClient).to.be.true;
+  });
+});
+
+describe('client only and server only tests', function(){
+  it.client('runs only in client', function(){
+    expect(Meteor.isClient).to.be.true;
+  });
+  it.server('runs only in server', function(){
+    expect(Meteor.isServer).to.be.true;
+  });
+});
+```
+
+
+
 
 
 #### Watchers API
@@ -126,56 +169,39 @@ Stubs.restoreAll();
 ````
 
 
-#### Nested Describes
 
-```javascript
 
-describe('top-level describe', function(){
-  describe('nested describe', function() {
-    describe('deep nested describe', function() {
-      it('a test', function () {
-        expect(true).to.be.true;
-      })
-    })
+
+
+#### Extended Example
+```js
+
+describe('suite1', function(){
+  before(function (test){
+    // Let's do 'cleanup' beforeEach too, in case another suite didn't clean up properly
+    watchers.restoreAll();
+    stubs.restoreAll();
+    console.log("I'm beforeAll");
+  });
+  beforeEach(function (test){
+    console.log("I'm beforeEach");
+    watchers.create('log', console, 'log');
+  });
+  afterEach(function (test){
+    watchers.restoreAll();
+    console.log("I'm afterEach");
+  });
+  after(function (test){
+    console.log("I'm afterAll");
+    watchers.restoreAll();
+    stubs.restoreAll();
+  });
+  it('test1', function(test){
+    console.log('Hello world');
+    expect(watchers.log).to.have.been.calledWith('Hello world');
   })
 });
 ```
-
-
-#### Server & Client Only Tests
-
-```javascript
-
-describe.client('client only test suite', function(){
-  it('runs only in client', function(){
-    expect(Meteor.isClient).to.be.true;
-  });
-  it.server('overrides describe.client and runs only in server', function(){
-    expect(Meteor.isServer).to.be.true;
-  });
-});
-
-describe.server('server only test suite', function(){
-  it('runs only in server', function(){
-    expect(Meteor.isServer).to.be.true;
-  });
-  it.client('overrides describe.server and runs only in client', function(){
-    expect(Meteor.isClient).to.be.true;
-  });
-});
-
-describe('client only and server only tests', function(){
-  it.client('runs only in client', function(){
-    expect(Meteor.isClient).to.be.true;
-  });
-  it.server('runs only in server', function(){
-    expect(Meteor.isServer).to.be.true;
-  });
-});
-```
-
-
-
 
 
 
