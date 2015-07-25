@@ -6,7 +6,7 @@ mySyncSuite = {
   }
 };
 
-Munit.run(mySyncSuite);
+Verification.run(mySyncSuite);
 
 myAsyncSuite = {
   name: 'myAsyncSuite',
@@ -21,7 +21,7 @@ myAsyncSuite = {
   }
 };
 
-Munit.run(myAsyncSuite);
+Verification.run(myAsyncSuite);
 
 tddTestSuite = {
 
@@ -88,4 +88,4 @@ tddTestSuite = {
   ]
 };
 
-Munit.run(tddTestSuite);
+Verification.run(tddTestSuite);

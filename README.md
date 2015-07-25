@@ -1,15 +1,19 @@
 ## clinical:verification
 
-clinical:verification is a fork and extention of the excellent [mUnit](https://atmospherejs.com/practicalmeteor/munit) package created by [practicalmeteor(aka Ronen))](https://atmospherejs.com/practicalmeteor) and modified to work with the [StarryNight](http://starrynight.meteor.com) utility and the [Clinical Meteor Track](http://clinical.meteor.com).  The primary reason for forking, rather than contributing, was to clean up some of the APIs to make them isomorphic with Nightwatch.  
+clinical:verification is a fork and extention of the excellent [practicalmeteor:munit](https://atmospherejs.com/practicalmeteor/munit) package and modified to work with the [StarryNight](http://starrynight.meteor.com) utility and the [Clinical Meteor Track](http://clinical.meteor.com).  The primary reason for forking, rather than contributing, was to clean up some of the APIs to make them isomorphic with Nightwatch.  
 
 
-## Installation
+#### Installation
 
-``meteor add practicalmeteor:munit``
+Simply install with the following command:
 
-[practicalmeteor:chai](https://atmospherejs.com/practicalmeteor/chai) and [practicalmeteor:sinon](https://atmospherejs.com/practicalmeteor/sinon) will be automatically added as well, which you can use in your tests.
+``meteor add clinical:verification``
 
-## Behavior Driven Verification Testing
+#### Behavior Driven Development API
+
+* `describe(suiteName, function)`
+* `it(testName, function)`
+
 
 ``clinical:verification`` allows you to use `describe` and `it` declaration in your verification tests:
 
@@ -18,57 +22,53 @@ clinical:verification is a fork and extention of the excellent [mUnit](https://a
 describe('suite1', function(){
   beforeAll(function (test){
     // Let's do 'cleanup' beforeEach too, in case another suite didn't clean up properly
-    spies.restoreAll();
+    virtuals.restoreAll();
     stubs.restoreAll();
     console.log("I'm beforeAll");
   });
   beforeEach(function (test){
     console.log("I'm beforeEach");
-    spies.create('log', console, 'log');
+    virtuals.create('log', console, 'log');
   });
   afterEach(function (test){
-    spies.restoreAll();
+    virtuals.restoreAll();
     console.log("I'm afterEach");
   });
   afterAll(function (test){
     console.log("I'm afterAll");
-    spies.restoreAll();
+    virtuals.restoreAll();
     stubs.restoreAll();
   });
   it('test1', function(test){
     console.log('Hello world');
-    expect(spies.log).to.have.been.calledWith('Hello world');
+    expect(virtuals.log).to.have.been.calledWith('Hello world');
   })
 });
 ```
 
-### The test argument
+#### TinyTest API
 
 The `test` argument is the same test object passed to a test function by `Tinytest.add`, and has the following methods:
 
-* `equal(actual, expected, msg)`
-* `notEqual(actual, expected, msg)`
+* `equal(actual, expected, message)`
+* `notEqual(actual, expected, message)`
 * `instanceOf(obj, klass)`
-* `matches(actual, regexp, msg)`
+* `matches(actual, regexp, message)`
 * `throws(func, expected)`
-* `isTrue(value, msg)`
-* `isFalse(value, msg)`
-* `isNull(value, msg)`
-* `isNotNull(value, msg)`
-* `isUndefined(value, msg)`
-* `isNaN(value, msg)`
+* `isTrue(value, message)`
+* `isFalse(value, message)`
+* `isNull(value, message)`
+* `isNotNull(value, message)`
+* `isUndefined(value, message)`
+* `isNaN(value, message)`
 * `include(object, key)`
 * `include(string, substring)`
 * `include(array, value)`
-* `length(obj, expected_length, msg)`
-
-The `msg` property is a custom error message for the assertion.
-
-You can use either the test object for your assertions or the included practicalmeteor:chai library.
+* `length(obj, expected_length, message)`
 
 You can see the source code [here](https://github.com/meteor/meteor/blob/devel/packages/tinytest/tinytest.js).
 
-### Asynchronous Tests
+#### Asynchronous Tests
 
 To run a test asynchronously, add a `waitFor` callback wrapper as an argument to your test function. When calling an async function, you need to wrap your callback with 'waitFor'. This will let MUnit know that a callback is pending and that the test will be done once the callback was called and has done it's thing.
 
@@ -197,7 +197,7 @@ To run your test suite, just:
 
 ```javascript
 
-Munit.run( yourTestSuiteObject );
+Verification.run( yourTestSuiteObject );
 ```
 
 ### Synchronous Tests
@@ -210,7 +210,7 @@ mySyncSuite = {
   }
 }
 
-Munit.run(mySuite);
+Verification.run(mySuite);
 ```
 
 ### Asynchronous Tests
@@ -230,7 +230,7 @@ myAsyncSuite = {
   }
 };
 
-Munit.run(myAsyncSuite);
+Verification.run(myAsyncSuite);
 ```
 
 The `waitFor` argument is the `expect` function wrapper passed to a test by testAsyncMulti from the meteor test-helpers package. In your test, you need to wrap your async callback function with waitFor, so testAsyncMulti knows that the test became asynchronous and a callback is pending. Unfortunately, you cannot have more than one async function call per test, due to the way testAsyncMulti works. We hope to eliminate this limitation soon.
@@ -245,30 +245,30 @@ tddTestSuite = {
 
   suiteSetup: function () {
     // Let's do 'cleanup' in suiteSetup too, in case another suite didn't clean up properly
-    spies.restoreAll();
+    virtuals.restoreAll();
     stubs.restoreAll();
     console.log("I'm suiteSetup");
   },
 
   setup: function () {
     console.log("I'm setup");
-    spies.create('log', console, 'log');
+    virtuals.create('log', console, 'log');
   },
 
   tearDown: function () {
-    spies.restoreAll();
+    virtuals.restoreAll();
     console.log("I'm tearDown");
   },
 
   suiteTearDown: function () {
     console.log("I'm suiteTearDown");
-    spies.restoreAll();
+    virtuals.restoreAll();
     stubs.restoreAll();
   },
 
   testSpies: function (test) {
     console.log('Hello world');
-    expect(spies.log).to.have.been.calledWith('Hello world');
+    expect(virtuals.log).to.have.been.calledWith('Hello world');
   },
 
   clientTestIsClient: function (test) {
@@ -304,7 +304,7 @@ tddTestSuite = {
   ]
 };
 
-Munit.run(tddTestSuite);
+Verification.run(tddTestSuite);
 ```
 
 ## Sample Meteor App
@@ -340,7 +340,7 @@ If you develop your package stand-alone, make sure meteor is in your path, and r
 
 ## Known Issues
 
-The **Munit** test runner uses a slightly modified version of the `testAsyncMulti` function (with support for test timeouts) from the test-helpers package shipped with meteor to run all the tests in the test suite including all the setup and `tearDown` functions.
+The **Verification** test runner uses a slightly modified version of the `testAsyncMulti` function (with support for test timeouts) from the test-helpers package shipped with meteor to run all the tests in the test suite including all the setup and `tearDown` functions.
 
 * If a test fails, afterEach / tearDown will not be called. This is because MUnit uses testAsyncMulti behind the scenes, and this is a limitation of testAsyncMulti. We therefore recommend, as a workaround, to do cleanup in beforeEach / setup too.
 

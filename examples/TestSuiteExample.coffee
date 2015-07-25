@@ -50,4 +50,4 @@ class TestSuiteExample
 
   suiteTearDown: ->
 
-Munit.run(new TestSuiteExample())
+Verification.run(new TestSuiteExample())

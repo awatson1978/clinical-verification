@@ -27,12 +27,12 @@ Package.onUse(function (api) {
   api.addFiles("log.js");
   api.addFiles("namespaces.js");
   api.addFiles("async_multi.js");
-  api.addFiles("Munit.coffee");
+  api.addFiles("Verification.coffee");
   api.addFiles("Helpers.coffee");
   api.addFiles("Describe.coffee");
 
   api.export(['lvTestAsyncMulti']);
-  api.export(['Munit']);
+  api.export(['Verification']);
   api.export(['describe', 'it', 'beforeAll', 'beforeEach', 'afterEach', 'afterAll']);
 });
 

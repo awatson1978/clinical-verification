@@ -13,7 +13,7 @@ class SyncSuiteSetupTest
 
 
 try
-  Munit.run(new SyncSuiteSetupTest())
+  Verification.run(new SyncSuiteSetupTest())
 catch err
   log.error(err.stack)
 
@@ -48,7 +48,7 @@ class AsyncSuiteSetupTest
     test.isFalse @isValid
 
 try
-  Munit.run(new AsyncSuiteSetupTest())
+  Verification.run(new AsyncSuiteSetupTest())
 catch err
   log.error(err.stack)
 
@@ -79,7 +79,7 @@ class SyncSuiteTearDownTest
 
 
 try
-  Munit.run(new SyncSuiteTearDownTest())
+  Verification.run(new SyncSuiteTearDownTest())
 catch err
   log.error(err.stack)
 
@@ -113,7 +113,7 @@ class AsyncSuiteTearDownTest
 
 
 try
-  Munit.run(new AsyncSuiteTearDownTest())
+  Verification.run(new AsyncSuiteTearDownTest())
 catch err
   log.error(err.stack)
 
@@ -154,7 +154,7 @@ class MultipleTestSyncSuiteTest
 
 
 try
-  Munit.run(new MultipleTestSyncSuiteTest())
+  Verification.run(new MultipleTestSyncSuiteTest())
 catch err
   log.error(err.stack)
 
@@ -198,7 +198,7 @@ class MultipleTestAsyncSuiteTest
 
 
 try
-  Munit.run(new MultipleTestAsyncSuiteTest())
+  Verification.run(new MultipleTestAsyncSuiteTest())
 catch err
   log.error(err.stack)
 
@@ -228,7 +228,7 @@ class ClientServerSyncSuiteTest
 
 
 try
-  Munit.run(new ClientServerSyncSuiteTest())
+  Verification.run(new ClientServerSyncSuiteTest())
 catch err
   log.error(err.stack)
 
@@ -262,7 +262,7 @@ class ClientServerAsyncSuiteTest
 
 
 try
-  Munit.run(new ClientServerAsyncSuiteTest())
+  Verification.run(new ClientServerAsyncSuiteTest())
 catch err
   log.error(err.stack)
 
@@ -349,7 +349,7 @@ class CompleteSuiteTest
 
 
 try
-  Munit.run(new CompleteSuiteTest())
+  Verification.run(new CompleteSuiteTest())
 catch err
   log.error(err.stack)
 
@@ -381,7 +381,7 @@ class SkipSuiteTest
 
 
 try
-  Munit.run(new SkipSuiteTest())
+  Verification.run(new SkipSuiteTest())
 catch err
   log.error(err.stack)
 
@@ -404,7 +404,7 @@ class TestsAsObjectSuiteTest
         test.fail("This should pass")
 
 try
-  Munit.run(new TestsAsObjectSuiteTest())
+  Verification.run(new TestsAsObjectSuiteTest())
 catch err
   log.error(err.stack)
 

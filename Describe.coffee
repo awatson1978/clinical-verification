@@ -3,7 +3,7 @@ _suite = null
 #displayedAsyncTestsMessage = false
 # runIfRequired = (suite, options = {}) ->
 #   options.run ?= true
-#   Munit.run(suite) if describe.autoRun is true and options.run is true
+#   Verification.run(suite) if describe.autoRun is true and options.run is true
 
 
 
@@ -50,7 +50,7 @@ describe = (text, func, options = {}) ->
 
     if describe.autoRun is true
 
-      Munit.run(suite)
+      Verification.run(suite)
 
   else
     # we still are inside a nested suite -> pop from stack
@@ -62,7 +62,7 @@ describe = (text, func, options = {}) ->
 
 ###
 Flag used to set whether test declarations are automatically
-passed into the [run] function of Munit.
+passed into the [run] function of Verification.
 
   NB: Used internally for testing.
 

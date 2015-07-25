@@ -62,4 +62,4 @@ TestSuiteExample = {
 
 }
 
-Munit.run(TestSuiteExample);
+Verification.run(TestSuiteExample);

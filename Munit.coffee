@@ -1,15 +1,15 @@
-class Munit
+class Verification
 
   @lastError: null
 
   @wrap: (func)->
     chai.expect(func).to.be.a('function')
     return ->
-      Munit.lastError = null
+      Verification.lastError = null
       try
         func()
       catch ex
-        Munit.lastError = ex
+        Verification.lastError = ex
         throw ex
 
   @run:(testSuite)->

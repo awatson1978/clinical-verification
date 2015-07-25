@@ -37,7 +37,7 @@ describeSuiteTest =
 
 
 try
-  Munit.run(describeSuiteTest)
+  Verification.run(describeSuiteTest)
 catch err
   log.error(err.stack)
 
