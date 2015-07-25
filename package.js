@@ -13,7 +13,7 @@ Package.onUse(function (api) {
 
   api.use([
     'practicalmeteor:loglevel@1.2.0_1',
-    "practicalmeteor:chai@2.1.0_1",
+    "practicalmeteor:chai@1.9.2_3",
     "practicalmeteor:sinon@1.10.3_2"]);
 
   api.imply(["tinytest","test-helpers"]);
