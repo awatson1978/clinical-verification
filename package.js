@@ -1,8 +1,8 @@
 Package.describe({
-    summary: "Meteor unit testing framework for packages",
-    name: "practicalmeteor:munit",
-    version: "2.1.4",
-    git: "https://github.com/practicalmeteor/meteor-munit.git"
+    summary: "FDA Verification Testing for Meteor applications.",
+    name: "clinical:verification",
+    version: "3.0.0",
+    git: "https://github.com/awatson/clinical-verification.git"
 });
 
 Package.onUse(function (api) {

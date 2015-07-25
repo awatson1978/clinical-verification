@@ -36,6 +36,7 @@ Tinytest.add('example', function (test) {
 
 The `test` argument can take any of [the following methods](https://github.com/meteor/meteor/blob/devel/packages/tinytest/tinytest.js):
 
+
 * `equal(actual, expected, message)`
 * `notEqual(actual, expected, message)`
 * `instanceOf(obj, klass)`
@@ -171,8 +172,26 @@ Stubs.restoreAll();
 ````
 
 
+#### Testing User Interfaces  
 
 
+````js
+describe('fooTemplate', function(){
+  it.client('should have customizable title', function(client){
+    var card = Blaze.renderWithData(
+    	Template.foo,
+    	{title: "lorem ipsum...", description: "words, words, words..."},
+    	document.body
+  	);
+
+  	expect.element('.foo').to.be.visible;
+  	expect.element('.foo .title').text.to.contain('lorem ipsum');
+
+  	Blaze.remove(card);
+  });
+});
+
+````
 
 
 #### Extended Example
