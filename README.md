@@ -126,7 +126,7 @@ Stubs.restoreAll();
 ````
 
 
-### Nested Describes
+#### Nested Describes
 
 ```javascript
 
@@ -142,7 +142,7 @@ describe('top-level describe', function(){
 ```
 
 
-### Server & Client Only Tests
+#### Server & Client Only Tests
 
 ```javascript
 
@@ -175,7 +175,7 @@ describe('client only and server only tests', function(){
 ```
 
 
-### Complete Example
+#### Complete Example
 
 ```javascript
 
@@ -250,7 +250,7 @@ Verification.run(tddTestSuite);
 
 
 
-## Contributions
+#### Contributions
 
 Contributions are more than welcome. Here are some of our contributors:
 
@@ -258,10 +258,10 @@ Contributions are more than welcome. Here are some of our contributors:
 * [@philcockfield](https://github.com/philcockfield) - added support for BDD style describe.it semantics.
 * [@DominikGuzei](https://github.com/DominikGuzei) - added support for nested describe blocks.
 
-## Changelog
+#### Changelog
 
 [CHANGELOG](https://github.com/practicalmeteor/meteor-munit/blob/master/CHANGELOG.md)
 
-## License
+#### License
 
 [MIT](https://github.com/practicalmeteor/meteor-munit/blob/master/LICENSE.txt)
