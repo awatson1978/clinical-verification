@@ -1,11 +1,7 @@
-[![Build Status](https://travis-ci.org/practicalmeteor/meteor-munit.svg?branch=master)](https://travis-ci.org/practicalmeteor/meteor-munit)
+## clinical:verification
 
-## Munit
+clinical:verification is a fork and extention of the excellent [mUnit](https://atmospherejs.com/practicalmeteor/munit) package created by [practicalmeteor(aka Ronen))](https://atmospherejs.com/practicalmeteor) and modified to work with the [StarryNight](http://starrynight.meteor.com) utility and the [Clinical Meteor Track](http://clinical.meteor.com).  The primary reason for forking, rather than contributing, was to clean up some of the APIs to make them isomorphic with Nightwatch.  
 
-**Munit** stands for meteor unit (tests). It is a wrapper around Tinytest, the package testing framework shipped with meteor. **Munit** adds support for test suites and some additional functionality that is standard in other testing frameworks, such as test timeouts, setup, tearDown, suiteSetup, and suiteTearDown.
-
-For additional information regarding Tinytest, please refer to this excellent screencast from the guys at EventedMind: [Testing Packages with Tinytest](https://www.eventedmind.com/feed/meteor-testing-packages-with-tinytest
-)
 
 ## Installation
 
@@ -13,9 +9,9 @@ For additional information regarding Tinytest, please refer to this excellent sc
 
 [practicalmeteor:chai](https://atmospherejs.com/practicalmeteor/chai) and [practicalmeteor:sinon](https://atmospherejs.com/practicalmeteor/sinon) will be automatically added as well, which you can use in your tests.
 
-## BDD Interface
+## Behavior Driven Verification Testing
 
-MUnit allows you to use `describe` and `it` declaration blocks to declare tests:
+``clinical:verification`` allows you to use `describe` and `it` declaration in your verification tests:
 
 ```javascript
 
@@ -337,20 +333,14 @@ If you develop your package stand-alone, make sure meteor is in your path, and r
 
 `meteor test-packages path-to-your-package`
 
-## Running your meteor app and your meteor package tests at the same time
 
-The way we work internally is to run our meteor app with a free [mongohq](http://www.mongohq.com/)  sandbox database and at the same time run all of our packages tests with the internal meteor mongodb on a different port:
+## Additional Resources
+``clinical:verification`` is an extention of TinyTest, so documentation such as the EventedMind screencast [Testing Packages with Tinytest](https://www.eventedmind.com/feed/meteor-testing-packages-with-tinytest) is relevant.
 
-* app: `MONGO_URL=... meteor`
-* tests: `unset MONGO_URL && export ROOT_URL=http://localhost:3100/ && meteor --port 3100 test-packages my-package1 my-package2`
-
-For our convenience, we created a couple of shell scripts, one that runs the app and one that runs all our package tests, and that set / unset all the meteor related environment variables before hand. We recommend you do the same.
-
-## Internals
-
-The **Munit** test runner uses a slightly modified version of the `testAsyncMulti` function (with support for test timeouts) from the test-helpers package shipped with meteor to run all the tests in the test suite including all the setup and `tearDown` functions.
 
 ## Known Issues
+
+The **Munit** test runner uses a slightly modified version of the `testAsyncMulti` function (with support for test timeouts) from the test-helpers package shipped with meteor to run all the tests in the test suite including all the setup and `tearDown` functions.
 
 * If a test fails, afterEach / tearDown will not be called. This is because MUnit uses testAsyncMulti behind the scenes, and this is a limitation of testAsyncMulti. We therefore recommend, as a workaround, to do cleanup in beforeEach / setup too.
 
@@ -360,6 +350,7 @@ The **Munit** test runner uses a slightly modified version of the `testAsyncMult
 
 Contributions are more than welcome. Here are some of our contributors:
 
+* [@practicalmeteor](https://github.com/practicalmeteor) - original munit package author; including chai, and sinon integration with TinyTest
 * [@philcockfield](https://github.com/philcockfield) - added support for BDD style describe.it semantics.
 * [@DominikGuzei](https://github.com/DominikGuzei) - added support for nested describe blocks.
 
