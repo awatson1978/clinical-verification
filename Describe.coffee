@@ -174,6 +174,11 @@ beforeAll = (func) -> _suite?.suiteSetup = wrap(func) if _.isFunction(func)
 
 
 ###
+Alias of beforeAll
+###
+before = (func) -> _suite?.suiteSetup = wrap(func) if _.isFunction(func)
+
+###
 Declares the test setup that is run before each test.
 ###
 beforeEach = (func) -> _suite?.setup = wrap(func) if _.isFunction(func)
@@ -190,6 +195,10 @@ Declares the suite tear-down that is run once after all tests are complete.
 ###
 afterAll = (func) -> _suite?.suiteTearDown = wrap(func) if _.isFunction(func)
 
+###
+Alias of afterAll
+###
+after = (func) -> _suite?.suiteTearDown = wrap(func) if _.isFunction(func)
 
 
 # PRIVATE --------------------------------------------------------------------------

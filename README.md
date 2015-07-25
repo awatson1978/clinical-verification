@@ -15,33 +15,31 @@ Simply install with the following command:
 * `it(testName, function)`
 
 
-``clinical:verification`` allows you to use `describe` and `it` declaration in your verification tests:
-
-```javascript
+```js
 
 describe('suite1', function(){
-  beforeAll(function (test){
+  before(function (test){
     // Let's do 'cleanup' beforeEach too, in case another suite didn't clean up properly
-    virtuals.restoreAll();
+    watchers.restoreAll();
     stubs.restoreAll();
     console.log("I'm beforeAll");
   });
   beforeEach(function (test){
     console.log("I'm beforeEach");
-    virtuals.create('log', console, 'log');
+    watchers.create('log', console, 'log');
   });
   afterEach(function (test){
-    virtuals.restoreAll();
+    watchers.restoreAll();
     console.log("I'm afterEach");
   });
-  afterAll(function (test){
+  after(function (test){
     console.log("I'm afterAll");
-    virtuals.restoreAll();
+    watchers.restoreAll();
     stubs.restoreAll();
   });
   it('test1', function(test){
     console.log('Hello world');
-    expect(virtuals.log).to.have.been.calledWith('Hello world');
+    expect(watchers.log).to.have.been.calledWith('Hello world');
   })
 });
 ```
@@ -67,6 +65,65 @@ The `test` argument is the same test object passed to a test function by `Tinyte
 * `length(obj, expected_length, message)`
 
 You can see the source code [here](https://github.com/meteor/meteor/blob/devel/packages/tinytest/tinytest.js).
+
+
+#### Watchers API
+
+````js
+// Creates a watcher named 'watcherName' for obj.method which you can later easily access by 'Watchers.spyName'
+// @obj [Object] obj and method are optional. If you don't specify them, it will create an anonymous spy function.
+// @method [String] The method of @obj to create a spy for.
+Watchers.create(spyName, obj, method)
+
+// You can just use Watchers.spyName instead of this method.
+Watchers.get(spyName)
+
+// You can just use Watchers.spyName.restore instead of this method.
+Watchers.restore(spyName)
+
+// Restore all watchers created with Watchers.create
+Watchers.restoreAll()
+````
+
+
+````js
+Watchers.create('log', console, 'log');
+console.log('Hello world');
+expect(Watchers.log).to.have.been.calledWith('Hello world');
+...
+// Later on in your test or test suite tear down
+Watchers.restoreAll();
+````
+
+#### Stubs API
+
+````js
+// Creates a stub named 'stubName' for obj.method which you can later easily access by 'Stubs.stubName'
+// @obj [Object] obj and method are optional. If you don't specify them, it will create an anonymous stub function.
+// @method [String] The method of @obj to create a stub for.
+Stubs.create(stubName, obj, method)
+
+// You can just use stubs.spyName instead of this method.
+Stubs.get(stubName)
+
+// You can just use stubs.stubName.restore instead of this method.
+Stubs.restore(stubName)
+
+// Restore all stubs created with stubs.create
+Stubs.restoreAll()
+````
+
+````js
+todos = new Mongo.collection('Todos');
+Stubs.create('findOne', todos, 'findOne');
+Stubs.findOne.returns({name: 'My todo'});
+
+// Your test code goes here.
+...
+
+// Later on in your test or test suite tear down
+Stubs.restoreAll();
+````
 
 #### Asynchronous Tests
 
@@ -245,30 +302,30 @@ tddTestSuite = {
 
   suiteSetup: function () {
     // Let's do 'cleanup' in suiteSetup too, in case another suite didn't clean up properly
-    virtuals.restoreAll();
+    watchers.restoreAll();
     stubs.restoreAll();
     console.log("I'm suiteSetup");
   },
 
   setup: function () {
     console.log("I'm setup");
-    virtuals.create('log', console, 'log');
+    watchers.create('log', console, 'log');
   },
 
   tearDown: function () {
-    virtuals.restoreAll();
+    watchers.restoreAll();
     console.log("I'm tearDown");
   },
 
   suiteTearDown: function () {
     console.log("I'm suiteTearDown");
-    virtuals.restoreAll();
+    watchers.restoreAll();
     stubs.restoreAll();
   },
 
   testSpies: function (test) {
     console.log('Hello world');
-    expect(virtuals.log).to.have.been.calledWith('Hello world');
+    expect(watchers.log).to.have.been.calledWith('Hello world');
   },
 
   clientTestIsClient: function (test) {
@@ -307,15 +364,7 @@ tddTestSuite = {
 Verification.run(tddTestSuite);
 ```
 
-## Sample Meteor App
 
-Provided thanks to Michael Risse:
-
-https://github.com/rissem/meteor-munit-example/
-
-See the lib package munit tests there, including how to add your tests to your package.js:
-
-https://github.com/rissem/meteor-munit-example/tree/master/packages/lib
 
 ## Running your package tests in the browser with hot code reloads
 
