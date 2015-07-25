@@ -175,77 +175,6 @@ describe('client only and server only tests', function(){
 ```
 
 
-#### Complete Example
-
-```javascript
-
-tddTestSuite = {
-
-  name: "TDD test suite",
-
-  suiteSetup: function () {
-    // Let's do 'cleanup' in suiteSetup too, in case another suite didn't clean up properly
-    watchers.restoreAll();
-    stubs.restoreAll();
-    console.log("I'm suiteSetup");
-  },
-
-  setup: function () {
-    console.log("I'm setup");
-    watchers.create('log', console, 'log');
-  },
-
-  tearDown: function () {
-    watchers.restoreAll();
-    console.log("I'm tearDown");
-  },
-
-  suiteTearDown: function () {
-    console.log("I'm suiteTearDown");
-    watchers.restoreAll();
-    stubs.restoreAll();
-  },
-
-  testSpies: function (test) {
-    console.log('Hello world');
-    expect(watchers.log).to.have.been.calledWith('Hello world');
-  },
-
-  clientTestIsClient: function (test) {
-    test.isTrue(Meteor.isClient);
-    test.isFalse(Meteor.isServer);
-  },
-
-  serverTestIsServer: function(test){
-    test.isTrue(Meteor.isServer);
-    test.isFalse(Meteor.isClient);
-  },
-
-  tests: [
-    {
-      name: "skipped client test",
-      type: 'client',
-      skip: true,
-      func: function (test) {
-        test.isTrue(true)
-      }
-    },
-    {
-      name: "async test with timeout",
-      timeout: 500,
-      func: function (test, waitFor) {
-        var onTimeout = function(){
-          test.isTrue(true);
-        };
-
-        Meteor.setTimeout(waitFor(onTimeout), 50);
-      }
-    }
-  ]
-};
-
-Verification.run(tddTestSuite);
-```
 
 
 
@@ -254,7 +183,7 @@ Verification.run(tddTestSuite);
 
 Contributions are more than welcome. Here are some of our contributors:
 
-* [@practicalmeteor](https://github.com/practicalmeteor) - original munit package author; including chai, and sinon integration with TinyTest
+* [@practicalmeteor](https://github.com/practicalmeteor) - original munit package author
 * [@philcockfield](https://github.com/philcockfield) - added support for BDD style describe.it semantics.
 * [@DominikGuzei](https://github.com/DominikGuzei) - added support for nested describe blocks.
 
