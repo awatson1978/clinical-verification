@@ -81,32 +81,33 @@ describe('top-level describe', function(){
 #### Server & Client Only Tests
 
 ```javascript
-describe.client('client only test suite', function(){
-  it('runs only in client', function(){
+describe.client('client only test suite', function (){
+  it('runs only in client', function (){
     expect(Meteor.isClient).to.be.true;
   });
-  it.server('overrides describe.client and runs only in server', function(){
+  it.server('overrides describe.client and runs only in server', function (){
     expect(Meteor.isServer).to.be.true;
   });
 });
 
-describe.server('server only test suite', function(){
-  it('runs only in server', function(){
+describe.server('server only test suite', function (){
+  it('runs only in server', function (){
     expect(Meteor.isServer).to.be.true;
   });
-  it.client('overrides describe.server and runs only in client', function(){
+  it.client('overrides describe.server and runs only in client', function (){
     expect(Meteor.isClient).to.be.true;
   });
 });
 
-describe('client only and server only tests', function(){
-  it.client('runs only in client', function(){
+describe('client only and server only tests', function () {
+  it.client('runs only in client', function () {
     expect(Meteor.isClient).to.be.true;
   });
-  it.server('runs only in server', function(){
+  it.server('runs only in server', function () {
     expect(Meteor.isServer).to.be.true;
   });
 });
+
 ```
 
 
