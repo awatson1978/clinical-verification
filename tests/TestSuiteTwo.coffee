@@ -1,6 +1,0 @@
-class TestSuiteTwo
-
-  suiteSetup:->
-
-
-  suiteTearDown:->

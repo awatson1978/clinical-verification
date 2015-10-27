@@ -2,13 +2,11 @@ TestSuiteExample = {
 
   name: "TestSuiteExample",
 
-  suiteSetup: function () {
-  },
+  suiteSetup: function () {},
 
-  setup: function () {
-  },
+  setup: function () {},
 
-  testAsync: function (test,done) {
+  testAsync: function (test, done) {
     myAsyncFunction(done(function (value) {
       test.isNotNull(value);
     }));
@@ -23,7 +21,7 @@ TestSuiteExample = {
     test.isFalse(Meteor.isServer);
   },
 
-  serverTestIsServer: function(test){
+  serverTestIsServer: function (test) {
     test.isTrue(Meteor.isServer);
     test.isFalse(Meteor.isClient);
   },
@@ -32,7 +30,7 @@ TestSuiteExample = {
     {
       name: "sync test",
       func: function (test) {
-        test.isTrue(true)
+        test.isTrue(true);
       }
     },
     {
@@ -54,12 +52,9 @@ TestSuiteExample = {
     }
   ],
 
-  tearDown: function () {
-  },
+  tearDown: function () {},
 
-  suiteTearDown: function () {
-  }
-
-}
+  suiteTearDown: function () {}
+};
 
 Verification.run(TestSuiteExample);

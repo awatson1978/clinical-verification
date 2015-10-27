@@ -1,6 +1,0 @@
-class TestSuiteOne
-
-  suiteSetup:()->
-
-
-  suiteTearDown:->

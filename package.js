@@ -8,8 +8,11 @@ Package.describe({
 Package.onUse(function (api) {
   api.versionsFrom('0.9.3');
 
-  api.use(["coffeescript", "underscore"]);
-  api.use(["tinytest","test-helpers"]);
+  api.use("coffeescript");
+  api.use("underscore");
+  api.use("tinytest");
+  api.use("test-helpers");
+  api.use('practicalmeteor:mocha');
 
   api.use([
     'practicalmeteor:loglevel@1.2.0_1',
