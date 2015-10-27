@@ -1,8 +1,8 @@
 Package.describe({
     summary: "FDA Verification Testing for Meteor applications.",
     name: "clinical:verification",
-    version: "3.0.1",
-    git: "https://github.com/awatson1978/clinical-verification.git"
+    version: "4.0.1",
+    git: "https://github.com/clinical-meteor/clinical-verification.git"
 });
 
 Package.onUse(function (api) {
