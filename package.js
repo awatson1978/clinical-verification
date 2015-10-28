@@ -1,8 +1,8 @@
 Package.describe({
-    summary: "FDA Verification Testing for Meteor applications.",
-    name: "clinical:verification",
-    version: "4.0.1",
-    git: "https://github.com/clinical-meteor/clinical-verification.git"
+  summary: "FDA Verification Testing for Meteor applications.",
+  name: "clinical:verification",
+  version: "4.0.2",
+  git: "https://github.com/clinical-meteor/clinical-verification.git"
 });
 
 Package.onUse(function (api) {
@@ -16,10 +16,9 @@ Package.onUse(function (api) {
 
   api.use([
     'practicalmeteor:loglevel@1.2.0_1',
-    "practicalmeteor:chai@1.9.2_3",
     "practicalmeteor:sinon@1.10.3_2"]);
 
-  api.imply(["tinytest","test-helpers"]);
+  api.imply(["tinytest", "test-helpers"]);
 
   api.imply([
       'practicalmeteor:loglevel@1.2.0_1',
@@ -39,6 +38,6 @@ Package.onUse(function (api) {
   api.export(['describe', 'it', 'beforeAll', 'beforeEach', 'afterEach', 'afterAll']);
 });
 
-Package.onTest(function(api) {
-    api.use(["coffeescript", "practicalmeteor:loglevel@1.2.0_1", "practicalmeteor:munit@2.1.4"]);
+Package.onTest(function (api) {
+  api.use(["coffeescript", "practicalmeteor:loglevel@1.2.0_1", "practicalmeteor:munit@2.1.4"]);
 });
