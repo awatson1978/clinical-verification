@@ -1,7 +1,7 @@
 Package.describe({
   summary: "FDA Verification Testing for Meteor applications.",
   name: "clinical:verification",
-  version: "4.0.2",
+  version: "4.0.3",
   git: "https://github.com/clinical-meteor/clinical-verification.git"
 });
 
@@ -22,7 +22,6 @@ Package.onUse(function (api) {
 
   api.imply([
       'practicalmeteor:loglevel@1.2.0_1',
-      "practicalmeteor:chai",
       "practicalmeteor:sinon@1.10.3_2"
   ]);
 
